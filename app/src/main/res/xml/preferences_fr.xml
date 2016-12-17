@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+
+
+
+    <PreferenceCategory
+        android:title="Modèle SMS">
+
+
+
+        <ListPreference
+            android:icon="@drawable/pref_langue"
+            android:key="langue"
+            android:dialogTitle="Choix de la langue"
+            android:entries="@array/langues"
+            android:entryValues="@array/langues"
+            android:title="Choix de la langue" />
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>

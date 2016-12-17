@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">INF4041_SabriTANICH</string>
+    <string name="action_ok">ok</string>
+    <string name="my_contacts_fr">Mes contacts</string>
+    <string name="add_contact_fr">Ajouter un contact</string>
+    <string name="contact_details_fr">Détails du contact</string>
+    <string name="download_fr">Telechargement</string>
+</resources>
