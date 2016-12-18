@@ -1,39 +1,54 @@
 package com.sabri.inf4041_sabritanich.Fragments;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.sabri.inf4041_sabritanich.Services.GetContactService;
+
+import com.sabri.inf4041_sabritanich.Activities.ContactActivity;
+import com.sabri.inf4041_sabritanich.ContactDetail;
 import com.sabri.inf4041_sabritanich.R;
+import com.sabri.inf4041_sabritanich.Services.GetContactHandler;
+import com.sabri.inf4041_sabritanich.Storage.DbHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import static com.google.android.gms.internal.zzid.runOnUiThread;
 
 
 public class DownloadFragment extends Fragment {
 
     ImageView download;
     String langue;
-    private MyReceiver receiver;
-
-    public class MyReceiver extends BroadcastReceiver {
-        public static final String CONTACTS_UPDATE ="com.sabri.inf4041_sabritanich.CONTACTS_UPDATE";
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String text = intent.getStringExtra(GetContactService.SOURCE_URL);
-
-        }
-    }
+    public static ArrayList<ContactDetail> contactList;
+    SharedPreferences preferences;
+    DbHelper dbHelper;
+    SQLiteDatabase sqLiteDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,9 +56,10 @@ public class DownloadFragment extends Fragment {
         View view = null;
         view = inflater.inflate(R.layout.fragment_download, container, false);
 
-        IntentFilter intentFilter = new IntentFilter(MyReceiver.CONTACTS_UPDATE);
-        receiver = new MyReceiver();
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(receiver,intentFilter);
+        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        langue = preferences.getString("langue","Français");
+
+        contactList = new ArrayList<ContactDetail>();
 
         download = (ImageView) view.findViewById(R.id.download);
         download.setOnClickListener(new View.OnClickListener() {
@@ -67,9 +83,10 @@ public class DownloadFragment extends Fragment {
 
                             public void onClick(DialogInterface dialog, int which) {
                                 try {
-                                    Intent msgIntent = new Intent(getActivity(), GetContactService.class);
-                                    msgIntent.putExtra(GetContactService.URL,"http://api.openweathermap.org/data/2.5/weather?q=London&mode=xml");
-                                    getActivity().startService(msgIntent);
+                                    /*Intent msgIntent = new Intent(getActivity(), GetContactService.class);
+                                    msgIntent.putExtra(GetContactService.URL,"http://test.chiffaboutique.fr/json/contact.json");
+                                    getActivity().startService(msgIntent);*/
+                                    new GetContacts().execute();
 
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
@@ -87,37 +104,104 @@ public class DownloadFragment extends Fragment {
         return view;
     }
 
-   /* public void handleActionContacts(){
-        URL url = null;
-        try{
-            url = new URL("");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
-            if(HttpURLConnection.HTTP_OK == connection.getResponseCode()){
-                copyInputStreamToFile(connection.getInputStream(),new File(getCacheDir(),"contacts.json"));
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private class GetContacts extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+
+
         }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            GetContactHandler getContactHandler = new GetContactHandler();
+            dbHelper = new DbHelper(getActivity());
+            sqLiteDatabase = dbHelper.getWritableDatabase();
+            // Making a request to url and getting response
+            String jsonStr = getContactHandler.callService("http://test.chiffaboutique.fr/json/contacts.json");
+
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    JSONArray contacts = jsonObj.getJSONArray("contacts");
+
+                    // looping through All Contacts
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+
+                        String name = c.getString("name");
+                        String first_name = c.getString("first_name");
+                        String telephone = c.getString("telephone");
+
+
+                        ContactDetail contactDetail = new ContactDetail(name,first_name,telephone,"");
+                        dbHelper.addContact(sqLiteDatabase,contactDetail);
+
+                    }
+                } catch (final JSONException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            /*Fragment currentFragment = getFragmentManager().findFragmentByTag("ContactFragment");
+            FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
+            fragTransaction.detach(currentFragment);
+            fragTransaction.attach(currentFragment);
+            fragTransaction.commit();*/
+           createNotification();
+            getActivity().finish();
+            Intent intent = new Intent(getActivity(),ContactActivity.class);
+            getActivity().startActivity(intent);
+        }
+
     }
 
-    public void copyInputStreamToFile(InputStream inputStream,File file){
-        try {
-            OutputStream outputStream = new FileOutputStream(file);
-            byte[] buf = new byte[1024];
-            int length;
-            while((length = inputStream.read(buf)) > 0){
-                outputStream.write(buf,0,length);
-            }
-            outputStream.close();
-            inputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
+    public void createNotification(){
+        final NotificationManager mNotification = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
+
+        final Intent launchNotifiactionIntent = new Intent(getActivity(), ContactActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(),
+                0, launchNotifiactionIntent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getActivity())
+                        .setSmallIcon(R.drawable.download2)
+                        .setContentTitle("Download")
+                        .setContentText("Download success");
+
+        mNotification.notify(0, mBuilder.build());
+    }
 }

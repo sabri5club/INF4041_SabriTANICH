@@ -4,9 +4,12 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
 import android.support.v4.content.LocalBroadcastManager;
+import android.widget.Toast;
 
+import com.sabri.inf4041_sabritanich.Activities.ContactActivity;
 import com.sabri.inf4041_sabritanich.Fragments.DownloadFragment;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,22 +26,18 @@ import java.net.URL;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class GetContactService extends IntentService {
+public class GetContactHandler {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    public static final String URL = "urlpath";
     public static final String SOURCE_URL = "destination_source";
 
 
-    public GetContactService() {
-        super("GetContactService");
+    public GetContactHandler() {
+
     }
 
 
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        String urlPath = intent.getStringExtra(URL);
+    public String callService(String urlPath) {
         URL url = null;
         BufferedReader buf = null;
         InputStream inputStream = null;
@@ -49,7 +48,7 @@ public class GetContactService extends IntentService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
-            inputStream = connection.getInputStream();
+            inputStream = new BufferedInputStream(connection.getInputStream());
             buf = new BufferedReader(new InputStreamReader(inputStream));
             stringBuilder = new StringBuilder();
             while ((ligne = buf.readLine()) != null){
@@ -73,13 +72,14 @@ public class GetContactService extends IntentService {
             }
         }
 
-        Intent broadcastIntent = new Intent(DownloadFragment.MyReceiver.CONTACTS_UPDATE);
+        /*Intent broadcastIntent = new Intent(ContactActivity.MyReceiver.CONTACTS_UPDATE);
         //broadcastIntent.setAction(DownloadFragment.MyReceiver.CONTACTS_UPDATE);
         //broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
         broadcastIntent.putExtra(SOURCE_URL, stringBuilder.toString());
         sendBroadcast(broadcastIntent);
 
-        //LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(DownloadFragment.MyReceiver.CONTACTS_UPDATE));
+        //LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(DownloadFragment.MyReceiver.CONTACTS_UPDATE));*/
+        return stringBuilder.toString();
 
     }
 

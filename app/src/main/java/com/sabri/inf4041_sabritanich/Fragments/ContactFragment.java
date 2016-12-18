@@ -35,10 +35,10 @@ public class ContactFragment extends Fragment {
     SQLiteDatabase db;
     DbHelper mDbHelper;
     SharedPreferences preferences;
-    List<ContactDetail> contactList;
+    public static List<ContactDetail> contactList;
     ContactDetail contact;
     FloatingActionButton addButton;
-    ListView listViewContacts;
+    public static ListView listViewContacts;
     ContactsAdapter contactsAdapter;
     String langue;
 
