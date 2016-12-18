@@ -1,11 +1,11 @@
-package com.sabri.inf4041_sabritanich.Adapters;
+package com.sabri.inf4042_sabritanich.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.sabri.inf4041_sabritanich.Fragments.ContactFragment;
-import com.sabri.inf4041_sabritanich.Fragments.DownloadFragment;
+import com.sabri.inf4042_sabritanich.Fragments.ContactFragment;
+import com.sabri.inf4042_sabritanich.Fragments.DownloadFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;

@@ -1,44 +1,23 @@
-package com.sabri.inf4041_sabritanich.Activities;
+package com.sabri.inf4042_sabritanich.Activities;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
-import com.sabri.inf4041_sabritanich.Adapters.PagerAdapter;
+import com.sabri.inf4042_sabritanich.Adapters.PagerAdapter;
 
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListAdapter;
-import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.sabri.inf4041_sabritanich.ContactDetail;
-import com.sabri.inf4041_sabritanich.Fragments.ContactFragment;
-import com.sabri.inf4041_sabritanich.R;
-import com.sabri.inf4041_sabritanich.Services.GetContactHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.sabri.inf4042_sabritanich.R;
 
 public class ContactActivity extends AppCompatActivity {
 

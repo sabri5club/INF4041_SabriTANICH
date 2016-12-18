@@ -1,13 +1,6 @@
-package com.sabri.inf4041_sabritanich.Services;
+package com.sabri.inf4042_sabritanich.Services;
 
 import android.app.IntentService;
-import android.content.Intent;
-import android.content.Context;
-import android.support.v4.content.LocalBroadcastManager;
-import android.widget.Toast;
-
-import com.sabri.inf4041_sabritanich.Activities.ContactActivity;
-import com.sabri.inf4041_sabritanich.Fragments.DownloadFragment;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

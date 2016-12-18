@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sabri.inf4041_sabritanich">
+    package="com.sabri.inf4042_sabritanich">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ContactActivity" android:screenOrientation="portrait">
+        <activity android:name="com.sabri.inf4042_sabritanich.Activities.ContactActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,15 +21,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.DisplayContactActivity"
+            android:name="com.sabri.inf4042_sabritanich.Activities.DisplayContactActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activities.PreferencesActivity"
+            android:name="com.sabri.inf4042_sabritanich.Activities.PreferencesActivity"
             android:label="Preferences"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activities.AddContactActivity"
+            android:name="com.sabri.inf4042_sabritanich.Activities.AddContactActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
         <!--

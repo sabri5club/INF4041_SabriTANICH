@@ -1,4 +1,4 @@
-package com.sabri.inf4041_sabritanich.Activities;
+package com.sabri.inf4042_sabritanich.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +9,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import com.sabri.inf4041_sabritanich.R;
+import com.sabri.inf4042_sabritanich.R;
 
 
 public class PreferencesActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {

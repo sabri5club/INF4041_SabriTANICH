@@ -1,4 +1,4 @@
-package com.sabri.inf4041_sabritanich.Fragments;
+package com.sabri.inf4042_sabritanich.Fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -19,13 +19,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.sabri.inf4041_sabritanich.Activities.AddContactActivity;
-import com.sabri.inf4041_sabritanich.Activities.ContactActivity;
-import com.sabri.inf4041_sabritanich.Activities.DisplayContactActivity;
-import com.sabri.inf4041_sabritanich.ContactDetail;
-import com.sabri.inf4041_sabritanich.Adapters.ContactsAdapter;
-import com.sabri.inf4041_sabritanich.R;
-import com.sabri.inf4041_sabritanich.Storage.DbHelper;
+import com.sabri.inf4042_sabritanich.Activities.AddContactActivity;
+import com.sabri.inf4042_sabritanich.Activities.ContactActivity;
+import com.sabri.inf4042_sabritanich.Activities.DisplayContactActivity;
+import com.sabri.inf4042_sabritanich.ContactDetail;
+import com.sabri.inf4042_sabritanich.Adapters.ContactsAdapter;
+import com.sabri.inf4042_sabritanich.R;
+import com.sabri.inf4042_sabritanich.Storage.DbHelper;
 
 import java.util.List;
 

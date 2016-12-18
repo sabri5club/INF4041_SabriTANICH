@@ -1,4 +1,4 @@
-package com.sabri.inf4041_sabritanich.Activities;
+package com.sabri.inf4042_sabritanich.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +20,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.sabri.inf4041_sabritanich.ContactDetail;
-import com.sabri.inf4041_sabritanich.R;
-import com.sabri.inf4041_sabritanich.Storage.DbHelper;
+import com.sabri.inf4042_sabritanich.ContactDetail;
+import com.sabri.inf4042_sabritanich.R;
+import com.sabri.inf4042_sabritanich.Storage.DbHelper;
 
 
 public class AddContactActivity extends AppCompatActivity {

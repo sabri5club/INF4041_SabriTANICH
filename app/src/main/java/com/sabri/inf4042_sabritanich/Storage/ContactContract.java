@@ -1,4 +1,4 @@
-package com.sabri.inf4041_sabritanich.Storage;
+package com.sabri.inf4042_sabritanich.Storage;
 
 import android.provider.BaseColumns;
 

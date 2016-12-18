@@ -1,4 +1,4 @@
-package com.sabri.inf4041_sabritanich;
+package com.sabri.inf4042_sabritanich;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

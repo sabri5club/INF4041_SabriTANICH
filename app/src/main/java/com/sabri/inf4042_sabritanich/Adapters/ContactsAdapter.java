@@ -1,4 +1,4 @@
-package com.sabri.inf4041_sabritanich.Adapters;
+package com.sabri.inf4042_sabritanich.Adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.sabri.inf4041_sabritanich.ContactDetail;
-import com.sabri.inf4041_sabritanich.R;
-import com.sabri.inf4041_sabritanich.Storage.ContactContract;
+import com.sabri.inf4042_sabritanich.ContactDetail;
+import com.sabri.inf4042_sabritanich.R;
 
 import java.util.List;
 

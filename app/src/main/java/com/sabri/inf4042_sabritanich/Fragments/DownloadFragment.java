@@ -1,23 +1,17 @@
-package com.sabri.inf4041_sabritanich.Fragments;
+package com.sabri.inf4042_sabritanich.Fragments;
 
 import android.app.Dialog;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +20,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.sabri.inf4041_sabritanich.Activities.ContactActivity;
-import com.sabri.inf4041_sabritanich.ContactDetail;
-import com.sabri.inf4041_sabritanich.R;
-import com.sabri.inf4041_sabritanich.Services.GetContactHandler;
-import com.sabri.inf4041_sabritanich.Storage.DbHelper;
+import com.sabri.inf4042_sabritanich.Activities.ContactActivity;
+import com.sabri.inf4042_sabritanich.ContactDetail;
+import com.sabri.inf4042_sabritanich.R;
+import com.sabri.inf4042_sabritanich.Services.GetContactHandler;
+import com.sabri.inf4042_sabritanich.Storage.DbHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;

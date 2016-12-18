@@ -1,4 +1,4 @@
-package com.sabri.inf4041_sabritanich.Storage;
+package com.sabri.inf4042_sabritanich.Storage;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.sabri.inf4041_sabritanich.ContactDetail;
+import com.sabri.inf4042_sabritanich.ContactDetail;
 
 import java.util.ArrayList;
 
